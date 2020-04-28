@@ -1,0 +1,8 @@
+prefix=/home/zack/rob421/Marco_Polo_Sphero/ws/devel
+
+Name: sphero_run
+Description: Description of sphero_run
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

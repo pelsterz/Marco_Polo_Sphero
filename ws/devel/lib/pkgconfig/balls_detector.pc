@@ -1,0 +1,8 @@
+prefix=/home/zack/rob421/Marco_Polo_Sphero/ws/devel
+
+Name: balls_detector
+Description: Description of balls_detector
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs roscpp rospy sensor_msgs std_msgs cv_bridge image_transport
