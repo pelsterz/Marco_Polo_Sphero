@@ -1,0 +1,8 @@
+prefix=/home/zack/rob421/Marco_Polo_Sphero/ws/devel
+
+Name: sphero_driver
+Description: Description of sphero_driver
+Version: 0.1.2
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

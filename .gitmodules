@@ -1,0 +1,3 @@
+[submodule "ws/ws/src/sphero_ros"]
+	path = ws/ws/src/sphero_ros
+	url = https://github.com/asoriano1/sphero_ros.git
