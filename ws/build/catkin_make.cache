@@ -1,2 +1,2 @@
-sphero_communication
+rosserial/rosserial:rosserial/rosserial_arduino:rosserial/rosserial_client:rosserial/rosserial_embeddedlinux:rosserial/rosserial_mbed:rosserial/rosserial_msgs:rosserial/rosserial_python:rosserial/rosserial_server:rosserial/rosserial_test:rosserial/rosserial_tivac:rosserial/rosserial_vex_cortex:rosserial/rosserial_vex_v5:rosserial/rosserial_windows:rosserial/rosserial_xbee:sphero_communication
 -DCATKIN_DEVEL_PREFIX=/home/zack/rob421/Marco_Polo_Sphero/ws/devel -DCMAKE_INSTALL_PREFIX=/home/zack/rob421/Marco_Polo_Sphero/ws/install -G Unix Makefiles
