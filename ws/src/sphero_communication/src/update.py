@@ -1,31 +1,41 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import rospy
 
-from nav_msgs/OccupancyGrid.msg import OccupancyGrid
-from std_msgs/Int32.msg import Int32
-from std_msgs/Int8.msg import Int8
+#from nav_msgs.msg import OccupancyGrid
+from std_msgs.msg import Int32
+from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import Bool
 
-global speed = 0
+speed = 0
+#grid = OccupancyGrid()
 
 def tdoa_callback(time_diff):
+    print(f"tdoa {time_diff}")
     if speed == 0:
-        print(time_diff)
+        direction = Bool()
+        if time_diff.data < 200:
+            direction.data = 1
+        else:
+            direction.data = 0
+        pub.publish(direction)
 
-def analysis_callback(current_speed):
-    speed = current_speed;
+def analysis_callback(current_command):
+    global speed
+    speed = current_command.data[0];
+    print(f"current speed {speed}")
 
 if __name__ == "__main__":
     # Initialize the node
     rospy.init_node('update', log_level=rospy.DEBUG)
 
     # Setup publisher
-    pub = rospy.Publisher('/update',OccupancyGrid,queue_size=10)
+    pub = rospy.Publisher('/update',Bool,queue_size=10)
 
     # Setup subscriber
     tdoa_sub = rospy.Subscriber('/tdoa',Int32,tdoa_callback)
 
-    analysis_sub = rospy.Subscriber('/analysis_speed',Int8,analysis_callback)
+    analysis_sub = rospy.Subscriber('/analysis',UInt8MultiArray,analysis_callback)
 
     print("update node ready")
 
