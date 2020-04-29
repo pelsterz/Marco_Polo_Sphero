@@ -35,7 +35,7 @@ bool triggered = false;
 
 unsigned long trigger_time;
 unsigned long max_time = 292; // Max time allowed between signals [(10 cm)/(343 m/s)=291.5 usec]
-unsigned long cushion = 50000; // Cushion after being triggered
+unsigned long cushion = 10000; // Cushion after being triggered
 
 void setup()
 {
