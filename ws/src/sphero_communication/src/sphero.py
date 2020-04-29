@@ -2,7 +2,7 @@
 
 import rospy
 
-from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import UInt16MultiArray
 
 import sys
 from time import sleep
@@ -45,7 +45,7 @@ if __name__ == "__main__":
         sys.exit()
     
     # Setup subscriber
-    sub = rospy.Subscriber('/analysis',UInt8MultiArray,callback)
+    sub = rospy.Subscriber('/analysis',UInt16MultiArray,callback)
 
     print("sphero setup")
     

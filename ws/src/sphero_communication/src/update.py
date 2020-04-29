@@ -4,7 +4,7 @@ import rospy
 
 #from nav_msgs.msg import OccupancyGrid
 from std_msgs.msg import Int32
-from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import UInt16MultiArray
 from std_msgs.msg import Bool
 
 speed = 0
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     # Setup subscriber
     tdoa_sub = rospy.Subscriber('/tdoa',Int32,tdoa_callback)
 
-    analysis_sub = rospy.Subscriber('/analysis',UInt8MultiArray,analysis_callback)
+    analysis_sub = rospy.Subscriber('/analysis',UInt16MultiArray,analysis_callback)
 
     print("update node ready")
 

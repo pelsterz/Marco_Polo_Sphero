@@ -3,7 +3,7 @@
 import rospy
 
 #from nav_msgs.msg import OccupancyGrid
-from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import UInt16MultiArray
 from std_msgs.msg import Bool
 
 received_direction = False
@@ -24,10 +24,13 @@ def callback(direction):
     global received_direction
     global last_direction
 
-    command.data[0] = 150
+    command.data[0] = 200
     if direction.data:
         if last_direction:
-            command.data[1] -= 10
+            if (command.data[1] - 10) < 0:
+                command.data[1] = 255 + command.data[1] - 10
+            else:
+                command.data[1] -= 10
         else:
             command.data[1] += 5
 
@@ -39,12 +42,12 @@ if __name__ == "__main__":
     rospy.init_node('analysis', log_level=rospy.DEBUG)
 
     # Setup publisher
-    pub = rospy.Publisher('/analysis',UInt8MultiArray,queue_size=10)
+    pub = rospy.Publisher('/analysis',UInt16MultiArray,queue_size=10)
 
     # Setup subscriber
     tdoa_sub = rospy.Subscriber('/update',Bool,callback)
 
-    command = UInt8MultiArray()
+    command = UInt16MultiArray()
     
     command.data = [0, 0]
 
