@@ -2,7 +2,7 @@
 
 import rospy
 
-from std_msgs.msg import UInt8
+from std_msgs.msg import UInt8MultiArray
 
 import sys
 from time import sleep
@@ -25,14 +25,11 @@ def send():
 
         sphero.power.enter_soft_sleep()
 
-def speed_callback(new_speed):
+def callback(new_data):
     global speed 
-    speed = new_speed.data
-    send()
-
-def heading_callback(new_heading):
-    global heading 
-    heading = new_heading.data
+    global heading
+    speed = new_data.data[0]
+    heading = new_data.data[1]
     send()
 
 if __name__ == "__main__":
@@ -48,8 +45,7 @@ if __name__ == "__main__":
         sys.exit()
     
     # Setup subscriber
-    speed_sub = rospy.Subscriber('/analysis_speed',UInt8,speed_callback)
-    heading_sub = rospy.Subscriber('/analysis_heading',UInt8,heading_callback)
+    sub = rospy.Subscriber('/analysis',UInt8MultiArray,callback)
 
     print("sphero setup")
     

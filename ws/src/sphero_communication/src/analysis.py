@@ -2,32 +2,34 @@
 
 import rospy
 
-from nav_msgs/OccupancyGrid.msg import OccupancyGrid
-from std_msgs/Int8.msg import Int8
+from nav_msgs.msg import OccupancyGrid
+from std_msgs.msg import UInt8MultiArray
 
-global speed = 255
-global heading = 0
+def send(event):
+    print("sending command")
+    pub.publish(command)
 
-def grid_callback(grid):
+def callback(grid):
     print("received grid")
 
-    speed_pub.publish(speed)
-
-    heading_pub.publish(heading)
+    command.data[0] = 255
+    command.data[1] = 0
 
 if __name__ == "__main__":
     # Initialize the node
     rospy.init_node('update', log_level=rospy.DEBUG)
 
     # Setup publisher
-    speed_pub = rospy.Publisher('/analysis_speed',Int8,queue_size=10)
-    heading_pub = rospy.Publisher('/analysis_heading',Int8,queue_size=10)
+    pub = rospy.Publisher('/analysis',UInt8MultiArray,queue_size=10)
 
     # Setup subscriber
-    tdoa_sub = rospy.Subscriber('/update',OccupancyGrid,grid_callback)
+    tdoa_sub = rospy.Subscriber('/update',OccupancyGrid,callback)
+
+    command = UInt8MultiArray()
+    
+    command.data = [0, 0]
 
     print("analysis node ready")
 
-    # Turn control over to ROS
+    rospy.Timer(rospy.Duration(3), send) # Send commant every 3 seconds
     rospy.spin()
-
